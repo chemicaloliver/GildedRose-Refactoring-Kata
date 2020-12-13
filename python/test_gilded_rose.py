@@ -82,18 +82,7 @@ class GildedRoseTest(unittest.TestCase):
         items = [Item("Backstage passes to a TAFKAL80ETC concert", 0, 10)]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
-        self.assertEqual( 0 , items[0].quality
-        
-    def test_backstage_passes_decrease_to_zero_after_concert(self):
-        starting_quality = 10
-        items = [
-            Item("foo", 5, starting_quality), # 5 days left to sell
-            Item("foo", -1, starting_quality) # 1 day over sell by date
-        ]
+        self.assertEqual( 0 , items[0].quality)
 
-        gilded_rose = GildedRose(items)
-        gilded_rose.update_quality()
-
-        self.assertGreater((starting_quality - items[1].quality), (starting_quality - items[0].quality) )
 if __name__ == '__main__':
     unittest.main()
