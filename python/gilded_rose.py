@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 class GildedRose(object):
-
     def __init__(self, items):
         self.items = []
         for item in items:
@@ -34,9 +33,11 @@ class Item:
         return "%s, %s, %s" % (self.name, self.sell_in, self.quality)
 
 class GenericItem(Item):
-
     def __init__(self, item):
-         super().__init__(item.name, item.sell_in, item.quality)
+        if(item.quality > 50 and item.name != "Sulfuras, Hand of Ragnaros"):
+            raise Exception('Quality cannot exceed 50') 
+        
+        super().__init__(item.name, item.sell_in, item.quality)
 
     def updateQuality(self):
         if self.quality > 0:
@@ -46,7 +47,6 @@ class GenericItem(Item):
             self.quality -= 1
 
 class ConjuredItem(Item):
-
     def __init__(self, item):
          super().__init__(item.name, item.sell_in, item.quality)
 
@@ -56,7 +56,6 @@ class ConjuredItem(Item):
 
     
 class SulfurasItem(Item):
-
     def __init__(self, item):
          super().__init__(item.name, item.sell_in, item.quality)
 
@@ -64,7 +63,6 @@ class SulfurasItem(Item):
         pass
 
 class AgedBrieItem(Item):
-
     def __init__(self, item):
          super().__init__(item.name, item.sell_in, item.quality)
 
@@ -73,20 +71,19 @@ class AgedBrieItem(Item):
                 self.quality += 1
 
 class BackstagePassItem(Item):
-
     def __init__(self, item):
          super().__init__(item.name, item.sell_in, item.quality)
 
     def updateQuality(self):
-        if self.sell_in < 6:
-            if self.quality < 50:
-                self.quality +=  3
-
-        elif self.sell_in < 11:
-            if self.quality < 50:
-                self.quality += 2
-        
         if self.sell_in <= 0:
             self.quality = 0
+
+        elif self.sell_in < 6:
+            self.quality +=  3
+
+        elif self.sell_in < 11:
+            self.quality += 2
+        
+        
 
 

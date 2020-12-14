@@ -93,6 +93,10 @@ class GildedRoseTest(unittest.TestCase):
         self.assertEqual((starting_quality - gilded_rose.items[1].quality), 
             (starting_quality - gilded_rose.items[0].quality)/2 )
 
+    def test_item_cannot_have_quality_more_than_50(self):
+        items = [Item("foo", 0, 70)]
+        self.assertRaises(Exception, GildedRose, items)
+
     def test_categorize_item(self):
         items = [
             Item("foo", 5, 10),
